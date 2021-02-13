@@ -1,2 +1,5 @@
 # bbi-bot
-simple bot that adds data to a Google Sheet
+simple telegram bot that adds data to a Google Sheet
+
+https://core.telegram.org/bots
+https://developers.google.com/sheets/api/quickstart/python
