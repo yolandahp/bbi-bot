@@ -52,6 +52,7 @@ def add_to_sheet(user, value):
                                 range=range_name).execute()
 
     values = result.get('values')
+
     idx = 0
     date_today = datetime.now().strftime('%m/%d/%Y').lstrip("0").replace(" 0", " ")
     for i in range(len(values)):
@@ -78,12 +79,17 @@ def add_to_sheet(user, value):
         return value
     else:
         if user == "fatanugraha":
-            range_name = "{}!D{}".format(month, 3+idx-1)
+            range_name = "{}!D".format(month)
         elif user == "yolandahertita":
-            range_name = "{}!C{}".format(month, 3+idx-1)
+            range_name = "{}!C".format(month)
         
-        result = sheet.values().get(spreadsheetId=spreadsheet_id,
-                                    range=range_name).execute()
+        result = {}
+        i = 0
+
+        while "values" not in result:
+            new_range = range_name + str(3+idx-1 - i)
+            result = sheet.values().get(spreadsheetId=spreadsheet_id, range=new_range).execute()
+            i+=1
 
         return float(result['values'][0][0])
 
